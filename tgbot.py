@@ -8,12 +8,6 @@ TOKEN = "8295416672:AAERh0iCC0VqYwpHdJkKSrLLXSy7vxrruZk"  # вставь сюд�
 async def handle_video(update: Update, context: ContextTypes.DEFAULT_TYPE):
     url = update.message.text.strip()
 
-    if not (url.startswith("http://") or url.startswith("https://")):
-        await update.message.reply_text("Отправь ссылку на видео (YouTube, Instagram, TikTok и т.д.) 🎬")
-        return
-
-    await update.message.reply_text("⏳ Скачиваю видео, подожди немного...")
-
     try:
         # Папка для временных файлов
         os.makedirs("downloads", exist_ok=True)
@@ -45,3 +39,4 @@ app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_video))
 
 app.run_polling()
+
